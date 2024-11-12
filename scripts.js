@@ -9,16 +9,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Firebase initialization
     const firebaseConfig = {
-        apiKey: "AIzaSyDMeoBOr0eFa3iJWnMXB9srewDAIW0W9Lw",
-        authDomain: "rajaramwith.firebaseapp.com",
-        projectId: "rajaramwith",
-        storageBucket: "rajaramwith.firebasestorage.app",
-        messagingSenderId: "934449169578",
-        appId: "1:934449169578:web:b8e906f34f6055f950fcd3",
-        measurementId: "G-SWWM7QL4QL"
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID",
+        measurementId: "YOUR_MEASUREMENT_ID"
     };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+
+    // Helper function to display error messages
+    const showError = (message) => {
+        // Display error message to the user
+        const errorElement = document.createElement('p');
+        errorElement.className = 'error';
+        errorElement.innerText = message;
+        document.getElementById('form-wrapper').appendChild(errorElement);
+    };
 
     // Phone number sign-in setup
     document.getElementById('phoneSignIn').addEventListener('click', (e) => {
@@ -27,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Ensure phone number is in E.164 format
         if (!phoneNumber.startsWith('+')) {
-            alert('Please enter the phone number in E.164 format (e.g., +1234567890)');
+            showError('Please enter the phone number in E.164 format (e.g., +1234567890)');
             return;
         }
 
@@ -42,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch((error) => {
                 console.error('Error during phone sign-in:', error.code, error.message);
-                alert('Failed to send OTP. Please try again.');
+                showError('Failed to send OTP. Please try again.');
             })
             .finally(() => {
                 document.getElementById('phoneSignIn').disabled = false;
@@ -63,39 +72,38 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch((error) => {
                 console.error('Error verifying code:', error.code, error.message);
-                alert('Invalid code. Please try again.');
+                showError('Invalid code. Please try again.');
             })
             .finally(() => {
                 document.getElementById('verifyCode').disabled = false;
             });
     });
 
-    // Handle email-based signup and login (existing code)
+    // Handle email-based signup and login
     document.getElementById('signupForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = e.target.elements[1].value;
-        const password = e.target.elements[2].value;
+        const email = document.querySelector('#signupForm input[type="email"]').value;
+        const password = document.querySelector('#signupForm input[type="password"]').value;
+
         auth.createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                userCredential.user.sendEmailVerification()
-                    .then(() => {
-                        console.log('Verification email sent.');
-                        alert('Verification email sent. Please check your inbox.');
-                    }).catch((error) => {
-                        console.error('Error sending verification email:', error.message);
-                    });
+                return userCredential.user.sendEmailVerification();
+            })
+            .then(() => {
+                console.log('Verification email sent.');
+                alert('Verification email sent. Please check your inbox.');
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.error('Error signing up:', errorCode, errorMessage);
+                console.error('Error signing up:', error.code, error.message);
+                showError('Error signing up: ' + error.message);
             });
     });
 
     document.getElementById('loginForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = e.target.elements[0].value;
-        const password = e.target.elements[1].value;
+        const email = document.querySelector('#loginForm input[type="email"]').value;
+        const password = document.querySelector('#loginForm input[type="password"]').value;
+
         auth.signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 if (userCredential.user.emailVerified) {
@@ -107,41 +115,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.error('Error signing in:', errorCode, errorMessage);
+                console.error('Error signing in:', error.code, error.message);
+                showError('Error signing in: ' + error.message);
             });
     });
 
     // Google sign-in setup
     document.getElementById('googleSignIn').addEventListener('click', (e) => {
         e.preventDefault();
-        var provider = new firebase.auth.GoogleAuthProvider();
+        const provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider)
             .then((result) => {
                 console.log('User signed in with Google:', result.user);
                 window.location.href = "dashboard.html"; // Redirect to dashboard
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.error('Error signing in with Google:', errorCode, errorMessage);
+                console.error('Error signing in with Google:', error.code, error.message);
+                showError('Error signing in with Google: ' + error.message);
             });
     });
 
     // Apple sign-in setup
     document.getElementById('appleSignIn').addEventListener('click', (e) => {
         e.preventDefault();
-        var provider = new firebase.auth.OAuthProvider('apple.com');
+        const provider = new firebase.auth.OAuthProvider('apple.com');
         auth.signInWithPopup(provider)
             .then((result) => {
                 console.log('User signed in with Apple:', result.user);
                 window.location.href = "dashboard.html"; // Redirect to dashboard
             })
             .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.error('Error signing in with Apple:', errorCode, errorMessage);
+                console.error('Error signing in with Apple:', error.code, error.message);
+                showError('Error signing in with Apple: ' + error.message);
             });
     });
 
