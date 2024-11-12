@@ -1,0 +1,125 @@
+/* Add this CSS to your styles.css file */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Classy gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 
+                0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 400px;
+    max-width: 100%;
+    padding: 20px;
+}
+
+form, button {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form h1, h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+form input, input {
+    background: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+form button, button {
+    border: none;
+    padding: 12px 45px;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 80ms ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form button:hover, button:hover {
+    background-color: #3e8e41;
+}
+
+form p, p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+form p span, p span {
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+#googleSignIn {
+    background-color: #4285F4; /* Google blue color */
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#googleSignIn i {
+    margin-right: 8px; /* Adds space between icon and text */
+}
+
+#googleSignIn:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+}
+
+#appleSignIn {
+    background-color: #000000; /* Apple black color */
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#appleSignIn i {
+    margin-right: 8px; /* Adds space between icon and text */
+}
+
+#appleSignIn:hover {
+    background-color: #333333; /* Darker black on hover */
+}
+
+#switchToPhone {
+    background-color: #db4437; /* Original button color */
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#switchToPhone i {
+    margin-right: 8px; /* Adds space between icon and text */
+}
+
+#switchToPhone:hover {
+    background-color: #c33d2e;
+}
+
+#switchFromPhoneToLogin {
+    cursor: pointer;
+    color: #4CAF50;
+}
