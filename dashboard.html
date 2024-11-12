@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">EduApp</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="courses" class="course-list">
+            <h2>Your Courses</h2>
+            <div id="courses-container">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </section>
+
+        <section id="profile" class="profile-section">
+            <h2>Your Profile</h2>
+            <div class="profile-card">
+                <div class="profile-pic">
+                    <img id="profile-pic" src="profile-pic.jpg" alt="Profile Picture">
+                </div>
+                <div class="profile-info">
+                    <h3 id="profile-name">John Doe</h3>
+                    <p id="profile-email">john.doe@example.com</p>
+                    <button onclick="editProfile()">Edit Profile</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 EduApp. All rights reserved.</p>
+    </footer>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProfile()">&times;</span>
+            <h2>Edit Profile</h2>
+            <form>
+                <label for="edit-name">Name</label>
+                <input type="text" id="edit-name" placeholder="Name">
+                
+                <label for="edit-email">Email</label>
+                <input type="email" id="edit-email" placeholder="Email">
+                
+                <label for="edit-profile-pic">Profile Picture</label>
+                <input type="file" id="edit-profile-pic" accept="image/*">
+                
+                <button type="button" onclick="saveProfile()">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-storage.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
