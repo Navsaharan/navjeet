@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Admin Panel</h1>
+        </div>
+    </header>
+
+    <section>
+        <h2>Manage Students</h2>
+        <form id="addStudentForm">
+            <input type="text" id="name" placeholder="Student Name" required>
+            <input type="email" id="email" placeholder="Student Email" required>
+            <input type="text" id="course" placeholder="Course" required>
+            <button type="submit">Add Student</button>
+        </form>
+
+        <div id="studentList">
+            <!-- Student list will be dynamically populated here -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 University Admin</p>
+    </footer>
+
+    <script src="admin.js"></script>
+</body>
+</html>
